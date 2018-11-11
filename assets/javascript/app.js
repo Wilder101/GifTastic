@@ -11,33 +11,29 @@ $(document).ready(function() {
         "mouse"
     ];
 
-    // Counter of buttons for easy identification
-    let btnCounter = 0;
-
     // Render buttons function
     function renderButtons() {
+
+        // Clear out button content area
+        $("#content-buttons").empty();
 
         // Loop thround and render all topics into clickable buttons (in reverse order)
         for (let i = topics.length - 1; i >= 0 ; i--) {
 
             // Create button
             let aButton = $("<button>");
-            aButton.addClass("btn btn-lg btn-light");
-            aButton.addClass("type", "button");
-            aButton.attr("id", "topic");
+            aButton.addClass("btn btn-lg btn-light topic");
             aButton.attr("data-value", topics[i]);
             aButton.text(topics[i]);
     
             // Add button to page content
             $("#content-buttons").prepend(aButton);
     
-            // Update total button counter
-            btnCounter++;
         }
     } // End render buttons function
 
-    // Click event listener for all buttons
-    $(document).on("click", "button", getGiphyData);
+    // Click event listener for topic buttons
+    $(document).on("click", ".topic", getGiphyData);
 
     // Get GIPHY data via API
     function getGiphyData() {
@@ -66,9 +62,6 @@ $(document).ready(function() {
 
             // storing the data from the AJAX request in the results variable
             var results = response.data;
-
-            // Clear content, prep for images display
-            // $("#content").empty();
   
             // Display each result item
             for (let i = 0; i < results.length; i++) {
@@ -90,18 +83,34 @@ $(document).ready(function() {
   
                 // Show images
                 $("#content").prepend(topicDiv);
-                // $("#content").append(topicDiv);
-
-                // Prepend the topicDiv to the HTML page in the "#content" div
 
             } // End loop
+        });   // End .ajax method
+    }         // End get GIPHY data function
 
-            // Show buttons again -- UPDATE LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            // renderButtons();
+    // Click event listener for new topic submit button
+    $(document).on("click", "#add-topic-button", newTopicSubmit);
 
-        }); // End .ajax method
-    } // End get GIPHY data function
+    // Add new topic 
+    function newTopicSubmit() {
+
+        // Prevent form from refreshing the page
+        event.preventDefault();
+
+        // Get text input from user interface
+        let newTopic = $("#add-topic").val().trim();
+
+        console.log(newTopic);
+
+        // Add new topic to array of topics
+        topics.push(newTopic);
+
+        // Show buttons again
+        renderButtons();
+    
+    } // End new topic submit button function
         
+    // ****************************************
     // On page load, create buttons from topics
     renderButtons();
 

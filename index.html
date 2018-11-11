@@ -22,19 +22,33 @@
     </head>
 
     <body>
+
+        <!-- Bootstrap container -->
         <div class="container">
 
             <br>
             <h1 class="title m-3">GifTastic</h1>
-            <br><br>
 
             <!-- Button content inserted here -->
             <div id="content-buttons"></div>
-
             <hr>
 
-            <!-- Content inserted here -->
-            <div id="content"></div>
+            <!-- Gifs and add topic button content -->
+            <div class="row">
+                <div class="col-9">
+                    <!-- Gif Content inserted here -->
+                    <div id="content"></div>
+                </div>
+                <div class="col-3">
+                    <form>
+                        <div class="form-group">
+                            <label>Add an animal</label>
+                            <input type="text" class="form-control" id="add-topic" placeholder="anaconda">         <!-- for="add-topic" -->
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-light" id="add-topic-button">Submit</button>
+                    </form>
+                </div>
+            </div>
 
         </div> <!-- End Bootstrap container -->
 
