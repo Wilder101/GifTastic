@@ -1,1 +1,10 @@
 /* GifTastic by WBM, 11/7/18, style.css file */
+
+body {
+    background-color: gray;
+}
+
+.topic-img {
+    float: left;
+    margin: 10px;
+}

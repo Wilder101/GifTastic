@@ -1,8 +1,5 @@
 // GifTastic by WBM, 11/7/18, app.js file
 
-// Note: 11/7/18 20:32 -- https://developers.giphy.com/dashboard/ throws a Server Error (500) upon creation of an App to get an assigned API Key;
-// Using course key temporarily -- api_key=dc6zaTOxFJmzC
-
 $(document).ready(function() {
 
     // Array topics (aka theme)
@@ -20,9 +17,8 @@ $(document).ready(function() {
     // Render buttons function
     function renderButtons() {
 
-        // Loop thround and render all topics into clickable buttons
-        // for (let i = 0; i < topics.length; i++) {
-        for (let i = topics.length; i >= 0 ; i--) {
+        // Loop thround and render all topics into clickable buttons (in reverse order)
+        for (let i = topics.length - 1; i >= 0 ; i--) {
 
             // Create button
             let aButton = $("<button>");
@@ -33,8 +29,7 @@ $(document).ready(function() {
             aButton.text(topics[i]);
     
             // Add button to page content
-            // $("#content").append(aButton);
-            $("#content").prepend(aButton);
+            $("#content-buttons").prepend(aButton);
     
             // Update total button counter
             btnCounter++;
@@ -52,7 +47,7 @@ $(document).ready(function() {
   
         // Constructing a queryURL using the topic name
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-          oneTopic + "&api_key=dc6zaTOxFJmzC&limit=10";
+          oneTopic + "&api_key=UsV26yT4dUXfJHPMSRaNi2kQ02gPuCk3&limit=10";
 
         // Test query
         // https://api.giphy.com/v1/gifs/search?q=cat&api_key=dc6zaTOxFJmzC&limit=10
@@ -70,7 +65,6 @@ $(document).ready(function() {
             console.log(response.data);
 
             // storing the data from the AJAX request in the results variable
-            // var results = response.data;
             var results = response.data;
 
             // Clear content, prep for images display
@@ -81,6 +75,7 @@ $(document).ready(function() {
   
                 // Creating and storing a div tag
                 let topicDiv = $("<div>");
+                topicDiv.addClass("topic-img");
   
                 // Creating a paragraph tag with the result item's rating
                 var p = $("<p>").text("Rating: " + results[i].rating);
@@ -101,13 +96,12 @@ $(document).ready(function() {
 
             } // End loop
 
-            // Show buttons again
-            renderButtons();
+            // Show buttons again -- UPDATE LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            // renderButtons();
 
         }); // End .ajax method
     } // End get GIPHY data function
         
-
     // On page load, create buttons from topics
     renderButtons();
 
