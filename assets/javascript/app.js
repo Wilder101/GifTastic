@@ -68,7 +68,7 @@ $(document).ready(function() {
             var results = response.data;
 
             // Clear content, prep for images display
-            $("#content").empty();
+            // $("#content").empty();
   
             // Display each result item
             for (let i = 0; i < results.length; i++) {
