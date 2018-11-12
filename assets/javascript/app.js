@@ -78,7 +78,6 @@ $(document).ready(function() {
   
                 // Creating and store an image tag, set img src to a property pulled off the result item
                 var topicImage = $("<img>");
-                // topicImage.attr("src", results[i].images.fixed_height.url);
                 topicImage.attr("src", results[i].images.fixed_height_still.url);
                 topicImage.attr("data-still", results[i].images.fixed_height_still.url);
                 topicImage.attr("data-animate", results[i].images.fixed_height.url);
