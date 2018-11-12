@@ -1,6 +1,6 @@
 # GifTastic
 :octocat:
-### Use of the GIPHY API to make a dynamic web page that populates with gifs.
+### Use the GIPHY API to make a dynamic web page that populates with gif images.
 
 **What the project does:**
 This project is excellent for web developers to extend their knowledge of HTML5, CSS3, JavaScript, the jQuery library, Bootstrap, and the GIPHY API.
