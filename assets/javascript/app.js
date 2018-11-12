@@ -8,7 +8,17 @@ $(document).ready(function() {
         "dog",
         "bird",
         "frog",
-        "mouse"
+        "mouse",
+        "ferret",
+        "chinchilla",
+        "hedgehog",
+        "gerbil",
+        "pygmy goat",
+        "chicken",
+        "salamander",
+        "rabbit",
+        "capybara",
+        "rat"
     ];
 
     // Render buttons function
@@ -44,9 +54,6 @@ $(document).ready(function() {
         // Constructing a queryURL using the topic name
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
           oneTopic + "&api_key=UsV26yT4dUXfJHPMSRaNi2kQ02gPuCk3&limit=10";
-
-        // Test query
-        // https://api.giphy.com/v1/gifs/search?q=cat&api_key=dc6zaTOxFJmzC&limit=10
   
         // Performing an AJAX request with the queryURL
         $.ajax({
@@ -55,10 +62,6 @@ $(document).ready(function() {
         })
           // After data comes back from the request
           .then(function(response) {
-
-            // Testing
-            console.log(queryURL);
-            console.log(response.data);
 
             // storing the data from the AJAX request in the results variable
             var results = response.data;
@@ -75,7 +78,12 @@ $(document).ready(function() {
   
                 // Creating and store an image tag, set img src to a property pulled off the result item
                 var topicImage = $("<img>");
-                topicImage.attr("src", results[i].images.fixed_height.url);
+                // topicImage.attr("src", results[i].images.fixed_height.url);
+                topicImage.attr("src", results[i].images.fixed_height_still.url);
+                topicImage.attr("data-still", results[i].images.fixed_height_still.url);
+                topicImage.attr("data-animate", results[i].images.fixed_height.url);
+                topicImage.attr("data-state", "still");
+                topicImage.addClass("gif");
   
                 // Appending the paragraph and image tag to the topicDiv
                 topicDiv.append(p);
@@ -100,8 +108,6 @@ $(document).ready(function() {
         // Get text input from user interface
         let newTopic = $("#add-topic").val().trim();
 
-        console.log(newTopic);
-
         // Add new topic to array of topics
         topics.push(newTopic);
 
@@ -109,6 +115,31 @@ $(document).ready(function() {
         renderButtons();
     
     } // End new topic submit button function
+
+    // On click of gif image event handling
+    $(document).on("click", ".gif", gifOnClick);
+
+    // Animate or make still .gif image
+    function gifOnClick() {
+
+        // Get the data-state of the .gif; still or animate
+        let state = $(this).attr("data-state");
+ 
+        // If the clicked gif state is still, update its src to animated gif     
+        if (state === "still") {
+
+            // Set the gif data-state to animate
+            $(this).attr("src", $(this).attr("data-animate"));
+            $(this).attr("data-state", "animate");
+
+        } else {
+
+            // Set src to the still gif
+            $(this).attr("src", $(this).attr("data-still"));
+            $(this).attr("data-state", "still");
+
+        }
+    } // End gif on click function
         
     // ****************************************
     // On page load, create buttons from topics
